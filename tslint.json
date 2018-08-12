@@ -1,0 +1,13 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "ordered-imports": false,
+        "space-before-function-paren": true,
+        "object-literal-sort-keys": false,
+        "no-var-requires": false,
+        "interface-name": false,
+        "array-type": false,
+        "no-bitwise": false,
+        "indent": [true, "spaces", 4]
+    }
+}

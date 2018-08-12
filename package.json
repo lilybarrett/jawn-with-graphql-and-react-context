@@ -1,0 +1,48 @@
+{
+    "name": "jawn_shop",
+    "version": "0.0.1",
+    "description": "A shop selling INCREDIBLY valuable and useful things",
+    "main": "index.js",
+    "scripts": {
+        "test": "npm run test",
+        "dev": "parcel ./scenes/index.html",
+        "introspect": "apollo-codegen introspect-schema https://fakerql.com/graphql --output ./data/models/index.json",
+        "generate": "apollo-codegen generate ./data/**/*.ts --schema ./data/models/index.json --target typescript --output ./data/models/index.ts --add-typename --tag-name gql",
+        "typegen": "npm run introspect && npm run generate",
+        "build": "tsc"
+    },
+    "author": "",
+    "license": "UNLICENSED",
+    "dependencies": {
+        "@fortawesome/fontawesome": "^1.1.8",
+        "@fortawesome/fontawesome-free-brands": "^5.0.13",
+        "@fortawesome/fontawesome-free-solid": "^5.0.13",
+        "@fortawesome/fontawesome-svg-core": "^1.2.1",
+        "@fortawesome/free-solid-svg-icons": "^5.1.1",
+        "@fortawesome/react-fontawesome": "^0.1.0",
+        "apollo-cache-inmemory": "^1.2.5",
+        "apollo-client": "^2.3.5",
+        "apollo-codegen": "^0.20.2",
+        "apollo-link-http": "^1.5.4",
+        "emotion": "^9.2.6",
+        "graphql": "^0.13.2",
+        "graphql-tag": "^2.9.2",
+        "moment": "^2.22.2",
+        "react": "^16.4.2",
+        "react-apollo": "^2.1.9",
+        "react-dom": "^16.4.1",
+        "react-emotion": "^9.2.6",
+        "react-responsive": "^5.0.0",
+        "reactstrap": "^6.3.0"
+    },
+    "devDependencies": {
+        "@types/react": "^16.4.6",
+        "@types/react-dom": "^16.0.6",
+        "@types/reactstrap": "^6.0.0",
+        "node-sass": "^4.9.3",
+        "parcel-bundler": "^1.9.7",
+        "react-hot-loader": "^4.3.3",
+        "tslint": "^5.11.0",
+        "typescript": "^2.9.2"
+    }
+}

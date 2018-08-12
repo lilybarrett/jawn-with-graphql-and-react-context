@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "target": "es5",
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "outDir": "./out",
+        "baseUrl": "./",
+        "lib": [
+            "es2015",
+            "dom"
+        ]
+    }
+}

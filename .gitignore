@@ -1,0 +1,14 @@
+node_modules/
+*.js
+/**/*.js
+.cache/
+dist/
+*.tgz
+coverage/
+.vscode/
+**/*.map
+**/.DS_Store
+
+data/models/*
+
+out/
