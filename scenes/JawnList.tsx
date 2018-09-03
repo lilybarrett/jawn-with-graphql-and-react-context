@@ -2,10 +2,20 @@ import React from "react";
 import { JAWN_QUERY } from "../data/queries";
 import { graphql, ChildDataProps } from "react-apollo";
 import { FindJawnProducts } from "../data/models";
+import WithJawnContext from "../WithJawnContext";
+import { JawnState } from "../JawnContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/fontawesome-free-solid";
+import styled from "react-emotion";
+import { formatMoney } from "../data/formatters";
 
-type JawnListType = ChildDataProps<{}, FindJawnProducts>;
+type JawnListType = ChildDataProps<{}, FindJawnProducts> & JawnState;
 
-const JawnList: React.SFC<JawnListType> = ({ data }) => {
+const IconWrapper = styled("span")`
+    margin-left: 5px;
+`;
+
+const JawnList: React.SFC<JawnListType> = ({ data, market, addToCart }) => {
     if (data.loading) {
         return <div>Loading incredibly important and valuable inventory...</div>;
     }
@@ -15,8 +25,17 @@ const JawnList: React.SFC<JawnListType> = ({ data }) => {
             <ul>
                 {
                     data.allProducts.map((product) => {
+                        const { id, price, name } = product;
+                        const formattedPrice = formatMoney(market, price);
                         return (
-                            <li key={product.id}>{product.name}</li>
+                            <li key={id}>
+                                {name} - {formattedPrice}
+                                <IconWrapper onClick={() => addToCart(product)}>
+                                    <FontAwesomeIcon
+                                        icon={faPlus}
+                                    />
+                                </IconWrapper>
+                            </li>
                         );
                     })
                 }
@@ -27,4 +46,4 @@ const JawnList: React.SFC<JawnListType> = ({ data }) => {
 
 const WithJawnProductData = graphql<{}, FindJawnProducts>(JAWN_QUERY);
 
-export default WithJawnProductData(JawnList);
+export default WithJawnProductData(WithJawnContext(JawnList));
