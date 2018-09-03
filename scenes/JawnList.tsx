@@ -4,10 +4,18 @@ import { graphql, ChildDataProps } from "react-apollo";
 import { FindJawnProducts } from "../data/models";
 import WithJawnContext from "../WithJawnContext";
 import { JawnState } from "../JawnContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/fontawesome-free-solid";
+import styled from "react-emotion";
+import { formatMoney } from "../data/formatters";
 
 type JawnListType = ChildDataProps<{}, FindJawnProducts> & JawnState;
 
-const JawnList: React.SFC<JawnListType> = ({ data, market }) => {
+const IconWrapper = styled("span")`
+    margin-left: 5px;
+`;
+
+const JawnList: React.SFC<JawnListType> = ({ data, market, addToCart }) => {
     if (data.loading) {
         return <div>Loading incredibly important and valuable inventory...</div>;
     }
@@ -17,13 +25,16 @@ const JawnList: React.SFC<JawnListType> = ({ data, market }) => {
             <ul>
                 {
                     data.allProducts.map((product) => {
-                        const price = market === "US"
-                            ? product.price
-                            : (parseInt(product.price, 10) * 0.79).toFixed(2);
-                        const currencySymbol = market === "US" ? "$" : "£";
+                        const { id, price, name } = product;
+                        const formattedPrice = formatMoney(market, price);
                         return (
-                            <li key={product.id}>
-                                {product.name} - {currencySymbol}{price}
+                            <li key={id}>
+                                {name} - {formattedPrice}
+                                <IconWrapper onClick={() => addToCart(product)}>
+                                    <FontAwesomeIcon
+                                        icon={faPlus}
+                                    />
+                                </IconWrapper>
                             </li>
                         );
                     })
