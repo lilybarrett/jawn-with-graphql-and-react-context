@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "npm run test",
-        "dev": "parcel ./scenes/index.html",
+        "dev": "parcel ./index.html",
         "introspect": "apollo-codegen introspect-schema https://fakerql.com/graphql --output ./data/models/index.json",
         "generate": "apollo-codegen generate ./data/**/*.ts --schema ./data/models/index.json --target typescript --output ./data/models/index.ts --add-typename --tag-name gql",
         "typegen": "npm run introspect && npm run generate",
@@ -24,6 +24,7 @@
         "apollo-client": "^2.3.5",
         "apollo-codegen": "^0.20.2",
         "apollo-link-http": "^1.5.4",
+        "components": "^0.1.0",
         "emotion": "^9.2.6",
         "graphql": "^0.13.2",
         "graphql-tag": "^2.9.2",

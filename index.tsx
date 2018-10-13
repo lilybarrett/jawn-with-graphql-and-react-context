@@ -6,10 +6,10 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { hot } from "react-hot-loader";
 import { render } from "react-dom";
 import { Container } from "reactstrap";
-import JawnList from "./JawnList";
-import Cart from "./Cart";
-import JawnContext, { JawnState } from "../JawnContext";
-import { FindJawnProducts_allProducts } from "../data/models";
+import { JawnList } from "./components";
+import { Cart } from "./components";
+import JawnContext, { JawnState } from "./JawnContext";
+import { FindJawnProducts_allProducts } from "./data/models";
 import { Row, Col } from "reactstrap";
 
 const client = new ApolloClient({
