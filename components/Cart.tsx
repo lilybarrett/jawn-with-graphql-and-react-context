@@ -12,8 +12,7 @@ const IconWrapper = styled("span")`
 
 const Cart: React.SFC<JawnState> = ({ market, cart, removeFromCart }) => {
     const total = cart.reduce((sum, item) => {
-        sum += parseInt(item.price, 10);
-        return sum;
+        sum + parseInt(item.price, 10);
     }, 0);
     return (
         <>
