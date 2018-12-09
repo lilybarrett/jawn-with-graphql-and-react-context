@@ -10,7 +10,7 @@ const IconWrapper = styled("span")`
     margin-left: 5px;
 `;
 
-const Cart: React.SFC<JawnState> = ({ market, cart, removeFromCart }) => {
+const Cart: React.FunctionComponent<JawnState> = ({ market, cart, removeFromCart }) => {
     const total = cart.reduce((sum, item) => {
         sum + parseInt(item.price, 10);
     }, 0);

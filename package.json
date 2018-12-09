@@ -29,9 +29,9 @@
         "graphql": "^0.13.2",
         "graphql-tag": "^2.9.2",
         "moment": "^2.22.2",
-        "react": "^16.4.2",
+        "react": "16.7.0-alpha.2",
         "react-apollo": "^2.1.9",
-        "react-dom": "^16.4.1",
+        "react-dom": "16.7.0-alpha.2",
         "react-emotion": "^9.2.6",
         "react-responsive": "^5.0.0",
         "reactstrap": "^6.3.0"

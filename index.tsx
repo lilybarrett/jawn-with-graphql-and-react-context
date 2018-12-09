@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
 import { HttpLink } from "apollo-link-http";
@@ -19,46 +19,45 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
-class App extends React.Component<JawnState> {
-    public state = {
-        cart: [],
-    };
+const App: React.FunctionComponent<JawnState> = (props) => {
+    const [cart, setCart] = useState<any[]>([]);
+    // change this any type!
 
-    public addToCart = (item: FindJawnProducts_allProducts) => {
-        const updatedCart = [...this.state.cart, item];
-        this.setState({ cart: updatedCart });
+    const addToCart = (item: FindJawnProducts_allProducts) => {
+        const updatedCart = [...cart, item];
+        setCart(updatedCart);
+        console.log(cart);
+        // the state never gets updated
     }
+    
+    const removeFromCart = (itemIndex: number) => {
+        const updatedCart = cart;
+        updatedCart.splice!(itemIndex, 1);
+        setCart(updatedCart);
+    }    
 
-    public removeFromCart = (itemIndex: number) => {
-        const newCart = this.state.cart;
-        newCart.splice!(itemIndex, 1);
-        this.setState({ cart: newCart });
-    }
-
-    public render () {
-        const { market } = this.props;
-        return (
-            <ApolloProvider client={client}>
-                <JawnContext.Provider value={{
-                    cart: this.state.cart,
-                    addToCart: this.addToCart,
-                    removeFromCart: this.removeFromCart,
-                    market,
-                }}>
-                    <Container fluid>
-                        <Row>
-                            <Col xs={12} sm={6}>
-                                <JawnList />
-                            </Col>
-                            <Col xs={12} sm={6}>
-                                <Cart />
-                            </Col>
-                        </Row>
-                    </Container>
-                </JawnContext.Provider>
-            </ApolloProvider>
-        );
-    }
+    const { market } = props;
+    return (
+        <ApolloProvider client={client}>
+            <JawnContext.Provider value={{
+                cart,
+                addToCart,
+                removeFromCart,
+                market,
+            }}>
+                <Container fluid>
+                    <Row>
+                        <Col xs={12} sm={6}>
+                            <JawnList />
+                        </Col>
+                        <Col xs={12} sm={6}>
+                            <Cart />
+                        </Col>
+                    </Row>
+                </Container>
+            </JawnContext.Provider>
+        </ApolloProvider>
+    );
 }
 
 const HotApp = hot(module)(App);
